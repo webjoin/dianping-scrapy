@@ -23,5 +23,7 @@ class DianpingItem(scrapy.Item):
     type = scrapy.Field()
     biz_area = scrapy.Field()
     addr = scrapy.Field()
+    # pass
 
-    pass
+
+

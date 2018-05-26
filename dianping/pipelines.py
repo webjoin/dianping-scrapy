@@ -9,6 +9,7 @@ import scrapy
 from scrapy.pipelines.images import ImagesPipeline
 from scrapy.exceptions import DropItem
 import re
+import json
 
 
 class DianpingPipeline(object):
@@ -30,6 +31,7 @@ class DianpingPipeline(object):
         self.db = self.client[self.mongo_db]
         self.db_table = self.db['massage']
         spider.logger.info('open the mongo db ........')
+        pass
 
     def process_item(self, item, spider):
         # spider.logger.info(f"massage: item = {item}")
@@ -44,8 +46,26 @@ class DianpingPipeline(object):
             # raise DropItem("massage record inserted!")
             pass
             # return item
+            # # save to csv file
+            # # myClassJson = json.dumps(item)
+            # json_str = self.dianpingItem_2_json(daipingItem=item)
+            # filename = 'data/massage.csv'
+            # # 'a'表示append,即在原来文件内容后继续写数据（不清楚原有数据）
+            # with open(filename, 'a') as f:
+            #     f.write(json_str)
+            #     f.write("\n")
 
-    # 在爬虫结束时会调用
+    def dianpingItem_2_json(self, daipingItem):
+        dict1 = daipingItem.__dict__['_values']
+        print('---------------<<<', dict1)
+        values = []
+        for key in dict1:
+            values.append(dict1[key])
+
+        return ",".join(values)
+
+    # # 在爬虫结束时会调用
     def close_spider(self, spider):
         spider.logger.info("close_spider..............")
         self.client.close()
+        # pass
