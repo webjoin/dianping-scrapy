@@ -13,6 +13,7 @@ class DianpingItem(scrapy.Item):
 
     _id = scrapy.Field()  # _id 即使是mongodb默认添加，也需要在这里定义
 
+    dpId = scrapy.Field()
     title = scrapy.Field()
 
     igroup = scrapy.Field()
@@ -23,7 +24,21 @@ class DianpingItem(scrapy.Item):
     type = scrapy.Field()
     biz_area = scrapy.Field()
     addr = scrapy.Field()
+    branchShop = scrapy.Field()
+    district = scrapy.Field()
     # pass
 
 
+
+
+
+class DianpingShopStatusItem(scrapy.Item):
+    # define the fields for your item here like:
+
+    _id = scrapy.Field()  # _id 即使是mongodb默认添加，也需要在这里定义
+
+    shop_id = scrapy.Field()
+    shop_name = scrapy.Field()
+    shop_status = scrapy.Field()
+    # pass
 

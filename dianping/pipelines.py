@@ -5,11 +5,6 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import pymongo
-import scrapy
-from scrapy.pipelines.images import ImagesPipeline
-from scrapy.exceptions import DropItem
-import re
-import json
 
 
 class DianpingPipeline(object):
@@ -29,7 +24,8 @@ class DianpingPipeline(object):
     def open_spider(self, spider):
         self.client = pymongo.MongoClient(self.mongo_url)
         self.db = self.client[self.mongo_db]
-        self.db_table = self.db['massage']
+        # self.db_table = self.db['shop-status-3']
+        self.db_table = self.db['Massage-few-minhan']
         spider.logger.info('open the mongo db ........')
         pass
 
@@ -37,7 +33,7 @@ class DianpingPipeline(object):
         # spider.logger.info(f"massage: item = {item}")
         try:
             insertRes = self.db_table.insert_one(item)
-            spider.logger.info(f"massage: insertRes = {insertRes.inserted_id}")
+            # spider.logger.info(f"massage: insertRes = {insertRes.inserted_id}")
         except Exception as e:
             # 如果在try部份引发异常，则执行这段代码
             spider.logger.info(f"massage: insertRes(massage) Exception = {e}")

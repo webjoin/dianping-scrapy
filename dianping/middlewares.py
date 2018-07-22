@@ -6,7 +6,12 @@
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+import base64
 
+
+import random
+from scrapy import signals
+# from myproxies.settings import IPPOOL
 
 # class DianpingSpiderMiddleware(object):
 #     # Not all methods need to be defined. If a method is not defined,
@@ -102,8 +107,6 @@ from scrapy import signals
 #     def spider_opened(self, spider):
 #         spider.logger.info('Spider opened: %s' % spider.name)
 
-import random
-from dianping.dictionary1 import useragent
 
 
 
@@ -121,8 +124,20 @@ class HeadersMiddleware:
         # request.headers['Host'] = 'www.dianping.com',
         # request.headers['Pragma'] = 'no-cache',
         # request.headers['Upgrade-Insecure-Requests'] = '1',
-        # request.headers['User-Agent'] = random.choice(useragent)
-        pass
 
-        # request.headers = headers
-        # request.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:59.0) Gecko/20100101 Firefox/59.0'
+        # request.headers['User-Agent'] = random.choice(useragent)
+
+
+
+
+        proxy = ""
+
+        proxyUser = ""
+        proxyPass = ""
+
+        proxyAuth = "Basic " + base64.urlsafe_b64encode(bytes((proxyUser + ":" + proxyPass), "ascii")).decode("utf8")
+
+        request.meta['proxy'] = proxy
+        request.headers['Proxy-Authorization'] = proxyAuth
+
+        pass
