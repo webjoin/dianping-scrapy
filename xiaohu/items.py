@@ -8,31 +8,24 @@
 import scrapy
 
 
-class DianpingItem(scrapy.Item):
+class XiaohuBasicInfoItem(scrapy.Item):
     # define the fields for your item here like:
 
     _id = scrapy.Field()  # _id 即使是mongodb默认添加，也需要在这里定义
 
-    dpId = scrapy.Field()
-    title = scrapy.Field()
+    register_no = scrapy.Field()
+    test_status = scrapy.Field()
+    register_name = scrapy.Field()
+    register_date = scrapy.Field()
+    register_company = scrapy.Field()
 
-    igroup = scrapy.Field()
-    ibook = scrapy.Field()
-    start = scrapy.Field()
-    commentCount = scrapy.Field()
-    avgPrice = scrapy.Field()
-    type = scrapy.Field()
-    biz_area = scrapy.Field()
-    addr = scrapy.Field()
-    branchShop = scrapy.Field()
-    district = scrapy.Field()
     # pass
 
 
 
 
 
-class DianpingShopStatusItem(scrapy.Item):
+class xiaohuShopStatusItem(scrapy.Item):
     # define the fields for your item here like:
 
     _id = scrapy.Field()  # _id 即使是mongodb默认添加，也需要在这里定义

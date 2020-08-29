@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for dianping project
+# Scrapy settings for xiaohu project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,18 +9,18 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'dianping'
+BOT_NAME = 'xiaohu'
 
-SPIDER_MODULES = ['dianping.spiders']
-NEWSPIDER_MODULE = 'dianping.spiders'
+SPIDER_MODULES = ['xiaohu.spiders']
+NEWSPIDER_MODULE = 'xiaohu.spiders'
 
 
 # 指定mongodb数据库
 MONGO_URI = "10.211.55.5:27017"
-MONGO_DB = 'dianping'
+MONGO_DB = 'xiaohu'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'dianping (+http://www.yourdomain.com)'
+#USER_AGENT = 'xiaohu (+http://www.yourdomain.com)'
 # USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36'
 
 # Obey robots.txt rules
@@ -52,13 +52,13 @@ ROBOTSTXT_OBEY = False
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 # SPIDER_MIDDLEWARES = {
-#    'dianping.middlewares.DianpingSpiderMiddleware': 543,
+#    'xiaohu.middlewares.xiaohuSpiderMiddleware': 543,
 # }
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 # DOWNLOADER_MIDDLEWARES = {
-#    'dianping.middlewares.DianpingDownloaderMiddleware': 543,
+#    'xiaohu.middlewares.xiaohuDownloaderMiddleware': 543,
 # }
 
 # Enable or disable extensions
@@ -70,7 +70,7 @@ ROBOTSTXT_OBEY = False
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'dianping.pipelines.DianpingPipeline': 300,
+   'xiaohu.pipelines.xiaohuPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

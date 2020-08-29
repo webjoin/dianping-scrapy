@@ -30,7 +30,7 @@ headers1 = {
     'Accept-Language': 'zh,en-US;q=0.9,en;q=0.8,zh-CN;q=0.7',
     'Cache-Control': 'no-cache',
     'Connection': 'keep-alive',
-    'Host': 'www.dianping.com',
+    'Host': 'www.xiaohu.com',
     'Pragma': 'no-cache',
     'Cookie': '_hc.v=98790215-9c13-9c4a-825b-0b29c82162e1.1531385148; _lxsdk_cuid=1648daaf37cc8-0dc4633c6658ee-163e6952-13c680-1648daaf37cc8; _lxsdk=1648daaf37cc8-0dc4633c6658ee-163e6952-13c680-1648daaf37cc8; cy=1; cye=shanghai; s_ViewType=10; _lxsdk_s=1648e659421-33-8d5-323%7C%7C193',
     'Upgrade-Insecure-Requests': '1',

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 
-from ..items import DianpingShopStatusItem
+from ..items import xiaohuShopStatusItem
 from ..dictionary1 import useragent
 from ..dictionary1 import headers1
 import codecs
@@ -29,8 +29,8 @@ class ShopStatus1Spider(scrapy.Spider):
             #     # 'fengniao.middlewares.ProxiesMiddleware': 400,
             # 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
             # 'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 543,
-            # 'dianping.middlewares.HeadersMiddleware': 125
-            'dianping.middlewares.HeadersMiddleware': 543
+            # 'xiaohu.middlewares.HeadersMiddleware': 125
+            'xiaohu.middlewares.HeadersMiddleware': 543
         },
         'scrapy.middleware': {
 
@@ -39,7 +39,7 @@ class ShopStatus1Spider(scrapy.Spider):
 
     def read_shop_names_with_file(self):
         # filename = 'logger_data.txt'
-        filename = '/Users/elijah/Downloads/dianping-massage/massage.id'
+        filename = '/Users/elijah/Downloads/xiaohu-hucdc/hucdc.id'
         # 如果filename不存在会自动创建， 'w'表示写数据，写之前会清空文件中的原有数据！
         with codecs.open(filename, 'r', 'utf-8') as f:
             return f.readlines()
@@ -52,8 +52,8 @@ class ShopStatus1Spider(scrapy.Spider):
     def start_requests(self):
         self.logger.info("-------->>start_requests")
 
-        req_url_pattern = "http://www.dianping.com/poi/assistance/getshoppower.action?shopId={}&model=0&_nr_force={}"
-        req_url_pattern = "http://www.dianping.com/shop/{}"
+        req_url_pattern = "http://www.xiaohu.com/poi/assistance/getshoppower.action?shopId={}&model=0&_nr_force={}"
+        req_url_pattern = "http://www.xiaohu.com/shop/{}"
 
         shopIds = self.read_shop_names_with_file()
         ii = 0
@@ -105,7 +105,7 @@ class ShopStatus1Spider(scrapy.Spider):
             if not msg is None:
                 powerString = msg['powerString']
 
-        dpItem1 = DianpingShopStatusItem()
+        dpItem1 = xiaohuShopStatusItem()
         dpItem1['shop_id'] = shop_id
         dpItem1['shop_status'] = powerString
         yield dpItem1
@@ -133,7 +133,7 @@ class ShopStatus1Spider(scrapy.Spider):
         else:
             status = '正常'
 
-        dpItem1 = DianpingShopStatusItem()
+        dpItem1 = xiaohuShopStatusItem()
         dpItem1['shop_id'] = shop_id
         dpItem1['shop_name'] = shop_name
         dpItem1['shop_status'] = status

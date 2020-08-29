@@ -7,7 +7,7 @@
 import pymongo
 
 
-class DianpingPipeline(object):
+class xiaohuPipeline(object):
     def __init__(self, mongoUrl, mongoDB):
         self.mongo_url = mongoUrl
         self.mongo_db = mongoDB
@@ -24,34 +24,36 @@ class DianpingPipeline(object):
     def open_spider(self, spider):
         self.client = pymongo.MongoClient(self.mongo_url)
         self.db = self.client[self.mongo_db]
-        # self.db_table = self.db['shop-status-3']
-        self.db_table = self.db['Massage-few-minhan']
+        self.tab_chinadrugtrials = self.db['chinadrugtrials']
+        self.tab_cfdi = self.db['cfdi']
         spider.logger.info('open the mongo db ........')
         pass
 
     def process_item(self, item, spider):
-        # spider.logger.info(f"massage: item = {item}")
+        spider.logger.info("chinadrugtrials: item = %s}", item)
         try:
-            insertRes = self.db_table.insert_one(item)
-            # spider.logger.info(f"massage: insertRes = {insertRes.inserted_id}")
+            insertRes = self.tab_chinadrugtrials.insert_one(item)
+            spider.logger.info("chinadrugtrials: insertRes = %s", insertRes.inserted_id)
         except Exception as e:
             # 如果在try部份引发异常，则执行这段代码
-            spider.logger.info("massage: insertRes(massage) Exception = %s",e)
+            spider.logger.info("chinadrugtrials: insertRes(hucdc) Exception = %s", e)
         else:
             # 如果没有异常发生，则执行这段代码
-            # raise DropItem("massage record inserted!")
+            # raise DropItem("hucdc record inserted!")
+            spider.logger.info("finely chinadrugtrials : insertRes = %s", insertRes.inserted_id)
+
             pass
             # return item
             # # save to csv file
             # # myClassJson = json.dumps(item)
-            # json_str = self.dianpingItem_2_json(daipingItem=item)
-            # filename = 'data/massage.csv'
+            # json_str = self.xiaohuItem_2_json(daipingItem=item)
+            # filename = 'data/hucdc.csv'
             # # 'a'表示append,即在原来文件内容后继续写数据（不清楚原有数据）
             # with open(filename, 'a') as f:
             #     f.write(json_str)
             #     f.write("\n")
 
-    def dianpingItem_2_json(self, daipingItem):
+    def xiaohuItem_2_json(self, daipingItem):
         dict1 = daipingItem.__dict__['_values']
         print('---------------<<<', dict1)
         values = []
