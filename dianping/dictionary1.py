@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # 浏览器头信息
 
 useragent = [

@@ -36,7 +36,7 @@ class DianpingPipeline(object):
             # spider.logger.info(f"massage: insertRes = {insertRes.inserted_id}")
         except Exception as e:
             # 如果在try部份引发异常，则执行这段代码
-            spider.logger.info(f"massage: insertRes(massage) Exception = {e}")
+            spider.logger.info("massage: insertRes(massage) Exception = %s",e)
         else:
             # 如果没有异常发生，则执行这段代码
             # raise DropItem("massage record inserted!")

@@ -41,22 +41,7 @@ class MassageSpider(scrapy.Spider):
 
     def get_origin_urls(self):
         urls = [
-            # 'http://www.dianping.com/shanghai/ch30/g141r3p{}',
-            # 'http://www.dianping.com/shanghai/ch30/g141r4p{}',
-            # 'http://www.dianping.com/shanghai/ch30/g141r2p{}',
-            # 'http://www.dianping.com/shanghai/ch30/g141r10p{}',
-            # 'http://www.dianping.com/shanghai/ch30/g141r6p{}',
-            # 'http://www.dianping.com/shanghai/ch30/g141r9p{}',
-            # 'http://www.dianping.com/shanghai/ch30/g141r7p{}',
-            'http://www.dianping.com/shanghai/ch30/g141r12p{}',
-            # 'http://www.dianping.com/shanghai/ch30/g141r13p{}',
-            # 'http://www.dianping.com/shanghai/ch30/g141r5p{}',
-            # 'http://www.dianping.com/shanghai/ch30/g141r5937p{}',
-            # 'http://www.dianping.com/shanghai/ch30/g141r5938p{}',
-            # 'http://www.dianping.com/shanghai/ch30/g141r5939p{}',
-            # 'http://www.dianping.com/shanghai/ch30/g141r8847p{}',
-            # 'http://www.dianping.com/shanghai/ch30/g141r8846p{}',
-            # 'http://www.dianping.com/shanghai/ch30/g141c3580p{}'
+            'http://www.dianping.com/shanghai/ch30/r2869p{}',
         ]
 
         return urls
@@ -67,7 +52,7 @@ class MassageSpider(scrapy.Spider):
         urls = self.get_origin_urls()
 
         for url_pattern in urls:
-            page_num = 16
+            page_num = 0
             # req_url_pattern = "http://www.dianping.com/shanghai/ch30/g141p{}"
             print('url_pattern,page_num', url_pattern,'-------------', page_num)
             url = url_pattern.format(page_num)
@@ -87,8 +72,8 @@ class MassageSpider(scrapy.Spider):
         district = response.xpath('/html/body/div[2]/div[1]/span[5]/a/span/text()').extract()[0]
         meta = response.meta
         isGetNextPage = False
-        if len(articleLst) > 0:
-            isGetNextPage = True
+        # if len(articleLst) > 0:
+        #     isGetNextPage = True
 
         print('isGetNextPage', isGetNextPage)
 

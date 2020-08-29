@@ -16,7 +16,7 @@ NEWSPIDER_MODULE = 'dianping.spiders'
 
 
 # 指定mongodb数据库
-MONGO_URI = "localhost:27017"
+MONGO_URI = "10.211.55.5:27017"
 MONGO_DB = 'dianping'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent

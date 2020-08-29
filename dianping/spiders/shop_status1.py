@@ -13,11 +13,11 @@ import json
 class ShopStatus1Spider(scrapy.Spider):
     name = 'shop-status1'
     allowed_domains = ['dingping.com']
-    start_urls = ['http://dingping.com/']
+    start_urls = ['http://www.dingping.com/']
 
     manualRetry = 0
     custom_settings = {
-        'DOWNLOAD_DELAY': 0.3,  # 下载延时
+        'DOWNLOAD_DELAY': 1,  # 下载延时
         'LOG_LEVEL': 'INFO',  # 定义log等级
         'COOKIES_ENABLED': False,  # enabled by default
         # 'RANDOMIZE_DOWNLOAD_DELAY': False,
@@ -39,7 +39,7 @@ class ShopStatus1Spider(scrapy.Spider):
 
     def read_shop_names_with_file(self):
         # filename = 'logger_data.txt'
-        filename = '/Users/Elijah/Desktop/2018/July/点评ID'
+        filename = '/Users/elijah/Downloads/dianping-massage/massage.id'
         # 如果filename不存在会自动创建， 'w'表示写数据，写之前会清空文件中的原有数据！
         with codecs.open(filename, 'r', 'utf-8') as f:
             return f.readlines()
@@ -53,6 +53,7 @@ class ShopStatus1Spider(scrapy.Spider):
         self.logger.info("-------->>start_requests")
 
         req_url_pattern = "http://www.dianping.com/poi/assistance/getshoppower.action?shopId={}&model=0&_nr_force={}"
+        req_url_pattern = "http://www.dianping.com/shop/{}"
 
         shopIds = self.read_shop_names_with_file()
         ii = 0
