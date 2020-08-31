@@ -24,15 +24,22 @@ class xiaohuPipeline(object):
     def open_spider(self, spider):
         self.client = pymongo.MongoClient(self.mongo_url)
         self.db = self.client[self.mongo_db]
-        self.tab_chinadrugtrials = self.db['chinadrugtrials']
-        self.tab_cfdi = self.db['cfdi']
+        self.tab_drugtrials_base = self.db['base_item']
+        self.tab_drugtrials_researcher = self.db['researcher_item']
+        self.tab_drugtrials_insts = self.db['insts_item']
+        self.tab_drugtrials_back = self.db['back_item']
+        self.tab_drugtrials_status = self.db['status_item']
         spider.logger.info('open the mongo db ........')
         pass
 
     def process_item(self, item, spider):
-        spider.logger.info("chinadrugtrials: item = %s}", item)
+        # spider.logger.info("chinadrugtrials: item = %s}", item)
         try:
-            insertRes = self.tab_chinadrugtrials.insert_one(item)
+            insertRes = self.tab_drugtrials_base.insert_one(item['base_inf'])
+            insertRes = self.tab_drugtrials_researcher.insert_one(item['researcher_inf'])
+            insertRes = self.tab_drugtrials_insts.insert_many(item['insts_inf'])
+            insertRes = self.tab_drugtrials_back.insert_one(item['back_inf'])
+            insertRes = self.tab_drugtrials_status.insert_one(item['status_inf'])
             spider.logger.info("chinadrugtrials: insertRes = %s", insertRes.inserted_id)
         except Exception as e:
             # 如果在try部份引发异常，则执行这段代码

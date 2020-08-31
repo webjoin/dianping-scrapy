@@ -7,33 +7,53 @@
 
 import base64
 
+from .items import ip_pool
+from .dictionary1 import useragent
+import random
+import base64
+import time
+import hashlib
+
 
 class HeadersMiddleware:
+
+    def base_code(self, username1, password):
+        str = '%s:%s' % (username1, password)
+        encodestr = base64.b64encode(str.encode('utf-8'))
+        return '%s' % encodestr.decode()
+
+    def generate_sign(self):
+        appkey = "154900555"
+        secret = "76f409cee11dbf48a8168c462dcbc77f"
+        mayi_url = "s9.proxy.mayidaili.com"
+        mayi_port = "8123"
+        mayi_proxy = 'http://{}:{}'.format(mayi_url, mayi_port)
+
+        paramMap = {
+            "app_key": appkey,
+            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
+        }
+
+        keys = sorted(paramMap)
+        codes = "%s%s%s" % (secret, str().join('%s%s' % (key, paramMap[key]) for key in keys), secret)
+
+        sign = hashlib.md5(codes.encode('utf-8')).hexdigest().upper()
+
+        paramMap["sign"] = sign
+
+        keys = paramMap.keys()
+        authHeader = "MYH-AUTH-MD5 " + str('&').join('%s=%s' % (key, paramMap[key]) for key in keys)
+        return authHeader, mayi_proxy
+
     def process_request(self, request, spider):
-        print('i"m here -------- >>> Using HeadersMiddleware!')
+        authHeader, mayi_proxy = self.generate_sign()
+        request.headers['User-Agent'] = random.choice(useragent)
+        request.headers["Mayi-Authorization"] = authHeader
 
-        request.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-        # request.headers['Accept'] = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-        # request.headers['Accept-Encoding'] = 'gzip, deflate',
-        # request.headers['Accept-Language'] = 'zh-CN,ja;q=0.8,zh;q=0.6,en-US;q=0.4,en;q=0.2',
-        # request.headers['Cache-Control'] = 'no-cache',
-        # request.headers['Connection'] = 'keep-alive',
-        # # request.headers['Cookie'] = '_lxsdk_cuid=16168f28064c8-03adfcfa14529e8-495960-13c680-16168f28064c8; _lxsdk=16168f28064c8-03adfcfa14529e8-495960-13c680-16168f28064c8; cityid=1; _hc.v=9e5f15b5-7d19-6bdc-f960-bd2da02ef00b.1521881183; switchcityflashtoast=1; s_ViewType=10; cy=1; cye=shanghai; _lxsdk_s=1637476af70-7ac-fe1-27e%7C%7C14',
-        # request.headers['Cookie'] = 'lxsdk_cuid=16168f28064c8-03adfcfa14529e8-495960-13c680-16168f28064c8; _lxsdk=16168f28064c8-03adfcfa14529e8-495960-13c680-16168f28064c8; cityid=1; _hc.v=9e5f15b5-7d19-6bdc-f960-bd2da02ef00b.1521881183; switchcityflashtoast=1; s_ViewType=10; cy=1; cye=shanghai; _lxsdk_s=1637476af70-7ac-fe1-27e%7C%7C21',
-        # request.headers['Host'] = 'www.xiaohu.com',
-        # request.headers['Pragma'] = 'no-cache',
-        # request.headers['Upgrade-Insecure-Requests'] = '1',
-
-        # request.headers['User-Agent'] = random.choice(useragent)
-
-        proxy = ""
-
-        proxyUser = ""
-        proxyPass = ""
-
-        proxyAuth = "Basic " + base64.urlsafe_b64encode(bytes((proxyUser + ":" + proxyPass), "ascii")).decode("utf8")
-
-        request.meta['proxy'] = proxy
-        request.headers['Proxy-Authorization'] = proxyAuth
+        # request.header
+        # thisip = random.choice(ip_pool)
+        # proxy = "http://" + thisip
+        # proxy = "http://proxy.wandouip.com:8090"
+        request.meta['proxy'] = mayi_proxy
 
         pass

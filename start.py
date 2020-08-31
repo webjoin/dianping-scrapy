@@ -1,5 +1,3 @@
 from scrapy import cmdline
 
-
-
-cmdline.execute("scrapy crawl shop-status1".split())
+cmdline.execute("scrapy crawl chinadrugtrials".split())
