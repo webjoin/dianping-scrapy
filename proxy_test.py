@@ -5,8 +5,8 @@ import hashlib
 
 
 def generate_sign():
-    appkey = "154900555"
-    secret = "76f409cee11dbf48a8168c462dcbc77f"
+    appkey = "xxxx"
+    secret = "xxxxx"
     mayi_url = "s9.proxy.mayidaili.com"
     mayi_port = "8123"
     mayi_proxy = 'http://{}:{}'.format(mayi_url, mayi_port)
