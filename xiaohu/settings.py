@@ -16,6 +16,7 @@ NEWSPIDER_MODULE = 'xiaohu.spiders'
 
 # 指定mongodb数据库
 MONGO_URI = "10.211.55.5:27017"
+# MONGO_URI = "127.0.0.1:27017"
 MONGO_DB = 'xiaohu'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -60,7 +61,7 @@ DOWNLOADER_MIDDLEWARES = {
     #    'xiaohu.middlewares.xiaohuDownloaderMiddleware': 543,
     #'scrapy_proxy_pool.middlewares.ProxyPoolMiddleware': 610,
     # 'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 543,
-    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 543,
+    # 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 543,
     'xiaohu.middlewares.HeadersMiddleware': 543,
     #'scrapy_proxy_pool.middlewares.BanDetectionMiddleware': 620,
 }

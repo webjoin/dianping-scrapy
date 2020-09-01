@@ -23,8 +23,8 @@ class HeadersMiddleware:
         return '%s' % encodestr.decode()
 
     def generate_sign(self):
-        appkey = "154900555"
-        secret = "76f409cee11dbf48a8168c462dcbc77f"
+        appkey = "xx"
+        secret = "xxx"
         mayi_url = "s9.proxy.mayidaili.com"
         mayi_port = "8123"
         mayi_proxy = 'http://{}:{}'.format(mayi_url, mayi_port)
@@ -48,12 +48,12 @@ class HeadersMiddleware:
     def process_request(self, request, spider):
         authHeader, mayi_proxy = self.generate_sign()
         request.headers['User-Agent'] = random.choice(useragent)
-        request.headers["Mayi-Authorization"] = authHeader
+        # request.headers["Mayi-Authorization"] = authHeader
 
         # request.header
         # thisip = random.choice(ip_pool)
         # proxy = "http://" + thisip
         # proxy = "http://proxy.wandouip.com:8090"
-        request.meta['proxy'] = mayi_proxy
+        # request.meta['proxy'] = mayi_proxy
 
         pass

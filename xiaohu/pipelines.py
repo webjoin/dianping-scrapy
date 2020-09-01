@@ -24,22 +24,35 @@ class xiaohuPipeline(object):
     def open_spider(self, spider):
         self.client = pymongo.MongoClient(self.mongo_url)
         self.db = self.client[self.mongo_db]
-        self.tab_drugtrials_base = self.db['base_item']
-        self.tab_drugtrials_researcher = self.db['researcher_item']
-        self.tab_drugtrials_insts = self.db['insts_item']
-        self.tab_drugtrials_back = self.db['back_item']
-        self.tab_drugtrials_status = self.db['status_item']
+        self.public_info_item = self.db['public_info_item']
+        self.inst_item = self.db['inst_item']
+        # self.tab_drugtrials_base = self.db['base_item']
+        # self.tab_drugtrials_researcher = self.db['researcher_item']
+        # self.tab_drugtrials_insts = self.db['insts_item']
+        # self.tab_drugtrials_back = self.db['back_item']
+        # self.tab_drugtrials_status = self.db['status_item']
         spider.logger.info('open the mongo db ........')
         pass
 
     def process_item(self, item, spider):
         # spider.logger.info("chinadrugtrials: item = %s}", item)
         try:
-            insertRes = self.tab_drugtrials_base.insert_one(item['base_inf'])
-            insertRes = self.tab_drugtrials_researcher.insert_one(item['researcher_inf'])
-            insertRes = self.tab_drugtrials_insts.insert_many(item['insts_inf'])
-            insertRes = self.tab_drugtrials_back.insert_one(item['back_inf'])
-            insertRes = self.tab_drugtrials_status.insert_one(item['status_inf'])
+            # condition = {'登记号': item['reg_no']}
+            # publicExists = self.public_info_item.find_one(condition)
+            # if publicExists:
+            #     insertRes = self.public_info_item.update_one(condition, item['public_inf']);
+            # else:
+            # instList = self.inst_item.find(condition)
+            # if instList.count() > 0:
+            #     self.inst_item.delete_many(condition)
+            insertRes = self.inst_item.insert_many(item['inst_inf'])
+            insertRes = self.public_info_item.insert_one(item['public_inf'])
+
+            # insertRes = self.tab_drugtrials_base.insert_one(item['base_inf'])
+            # insertRes = self.tab_drugtrials_researcher.insert_one(item['researcher_inf'])
+            # insertRes = self.tab_drugtrials_insts.insert_many(item['insts_inf'])
+            # insertRes = self.tab_drugtrials_back.insert_one(item['back_inf'])
+            # insertRes = self.tab_drugtrials_status.insert_one(item['status_inf'])
             spider.logger.info("chinadrugtrials: insertRes = %s", insertRes.inserted_id)
         except Exception as e:
             # 如果在try部份引发异常，则执行这段代码
